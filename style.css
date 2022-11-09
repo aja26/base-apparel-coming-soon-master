@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap');
 
 :root{
-    /* ### Primary */
 
---desaturated-red: hsl(0, 36%, 70%);
---soft-red: hsl(0, 93%, 68%);
+    /* ### Primary */
+    --desaturated-red: hsl(0, 36%, 70%);
+    --soft-red: hsl(0, 93%, 68%);
+
+    --desaturated-red-bk: rgba(206, 151, 151, 0.15);
 
     /* ### Neutral */
 
---dark-grayish-red: hsl(0, 6%, 24%);
---dark-grayish-red-shadow: 0, 6%, 24%;
+    --dark-grayish-red: hsl(0, 6%, 24%);
+    --dark-grayish-red-shadow: 0, 6%, 24%;
 }
 
 *{
@@ -27,11 +29,27 @@ body{
 main{
     margin: 1rem;
     display: grid;
-    grid-template-columns: 35rem auto;
-    width: 63rem;
+    width: 62rem;
     place-self: center;
     overflow: hidden;
     box-shadow: 0px 0px 40px #d4d4d4;
+}
+
+.container{
+    background-image: url(images/bg-pattern-desktop.svg), url(images/bg-pattern-desktop.svg);
+    background-position: bottom, top right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-areas: "logo image" "article image";
+    grid-template-columns: 34rem 28rem;
+}
+
+picture{
+    grid-area: image;
+    background-image: url(images/hero-desktop.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 main img.right{
@@ -41,14 +59,13 @@ main img.right{
 
 main .logo{
     width: 30%;
+    grid-area: logo;
+    margin: 3rem 5rem 1rem;
 }
 
 article{
-    padding: 3rem 6rem 3rem 5rem;
-    background-image: url(images/bg-pattern-desktop.svg), url(images/bg-pattern-desktop.svg);
-    background-position: -4vh 0vw;
-    background-repeat: no-repeat;
-    background-size: cover;
+    grid-area: article;
+    margin: 0rem 5rem 5rem;
 }
 
 h1{
@@ -86,12 +103,23 @@ p{
 
 input{
     border: 0;
-    position: relative;
+    position: relative'
 }
 
 input[type=text]{
     width: 100%;
+}
 
+.input-container span{
+    color: var(--soft-red);
+    position: relative;
+    top: 0.5rem;
+    left: 0.9rem;
+    display: none;
+}
+
+.input-container span.error{
+    display: inline-block;
 }
 
 input::placeholder{
@@ -110,10 +138,20 @@ button{
     border: 0;
     position: absolute;
     right: 0;
-    overflow: hidden;
     cursor: pointer;
     box-shadow: 0px 13px 30px rgba(135, 69, 69, 0.35);
 }
+
+.input-container.error button::before {
+    width: 1.5rem;
+    height: 1.5rem;
+    content: '';
+    background-image: url(images/icon-error.svg);
+    display: inline-block;
+    position: absolute;
+    right: 6rem;
+    top: 0.75rem;
+  }
 
 button i img{
     height: 30%;
@@ -121,15 +159,39 @@ button i img{
 
 @media (max-width:42rem){
     main{
-        width: 100%;
-        grid-template-columns: 1fr;
+        width: 80vw;
     }
 
     article{
-        padding: 2rem 2.85rem;
+        margin: 1.5rem 2rem 2.5rem;
+    }
+
+    h1{
+        margin: 1rem;
+    }
+
+    .container{
+        width: 100%;
+        grid-template-areas: 
+        "logo" 
+        "image" 
+        "article";
+        grid-template-columns: 1fr;
+        background: var(--desaturated-red-bk);
+
+        background-image: none;
+    }
+
+    main .logo {
+        margin: 2rem;
     }
 
     h1, p{
         text-align: center;
+    }
+
+    picture{
+        background-image: url(images/hero-mobile.jpg);
+        height: 10rem;
     }
 }
